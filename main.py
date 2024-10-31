@@ -45,13 +45,14 @@ Base.metadata.create_all(engine)
 with Session(autoflush=False, bind=engine) as db:
     pass
 
-
     companies = db.query(Company).all()
     for company in companies:
-        print(f'Компания- {company.name}')
+        print(f'Компания - {company.name}')
+        
         print('Сотрудники: ')
         for user in company.users:
             print(f'{user.name}')
+
         print('Продукты: ')
         for product in company.products:
             print(f'{product.name}')
