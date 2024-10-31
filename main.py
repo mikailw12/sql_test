@@ -36,9 +36,6 @@ class Product(Base):
 
     company = relationship('Company', back_populates='products')
 
-
-
-
 Base.metadata.create_all(engine)
 
 
@@ -48,7 +45,7 @@ with Session(autoflush=False, bind=engine) as db:
     companies = db.query(Company).all()
     for company in companies:
         print(f'Компания - {company.name}')
-        
+
         print('Сотрудники: ')
         for user in company.users:
             print(f'{user.name}')
