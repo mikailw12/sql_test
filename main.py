@@ -32,7 +32,7 @@ class Product(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
-    company_id = Column(String, ForeignKey('companies.id'))
+    company_id = Column(Integer, ForeignKey('companies.id'))
 
     company = relationship('Company', back_populates='products')
 
@@ -40,18 +40,6 @@ Base.metadata.create_all(engine)
 
 
 with Session(autoflush=False, bind=engine) as db:
-    pass
-
-    companies = db.query(Company).all()
-    for company in companies:
-        print(f'Компания - {company.name}')
-
-        print('Сотрудники: ')
-        for user in company.users:
-            print(f'{user.name}')
-
-        print('Продукты: ')
-        for product in company.products:
-            print(f'{product.name}')
-
-        print("\n" + "-"*30 + "\n")    
+    user = db.query(User).all()
+    for u in user:
+        print(f'{u.name}, {u.company.name}')
